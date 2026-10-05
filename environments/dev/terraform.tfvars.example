@@ -1,0 +1,26 @@
+# =============================================================================
+# Example Variables - Copy to terraform.tfvars and fill in values
+# DO NOT commit terraform.tfvars to version control
+# =============================================================================
+
+# General
+project_name = "multicloud-dr"
+environment  = "dev"
+alert_email  = "your-email@example.com"
+
+# AWS
+aws_region        = "ap-south-1"
+aws_ami_id        = "ami-0dee22c13ea7a9a67"
+aws_instance_type = "t2.micro"
+aws_key_name      = "my-key-pair"
+
+# Azure
+azure_subscription_id = "your-subscription-id"
+azure_location        = "centralindia"
+azure_vm_size         = "Standard_B1s"
+azure_admin_password  = "ChangeMe!P@ssw0rd"
+
+# Database (shared config for both clouds)
+db_name     = "drapp"
+db_username = "dbadmin"
+db_password = "SuperSecretPassword123!"

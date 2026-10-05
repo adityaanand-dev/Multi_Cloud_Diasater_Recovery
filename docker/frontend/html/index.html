@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Cloud DR Application</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0d1117; color: #c9d1d9; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .container { max-width: 700px; width: 90%; }
+        .card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 40px; margin-bottom: 20px; }
+        h1 { color: #58a6ff; font-size: 2em; margin-bottom: 10px; }
+        .subtitle { color: #8b949e; margin-bottom: 30px; }
+        .status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
+        .status-item { background: #0d1117; padding: 15px; border-radius: 8px; border: 1px solid #30363d; }
+        .status-item h3 { font-size: 0.85em; color: #8b949e; margin-bottom: 5px; }
+        .status-item .value { font-size: 1.1em; font-weight: 600; }
+        .badge { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 0.85em; font-weight: 600; }
+        .badge-aws { background: #ff990020; color: #ff9900; border: 1px solid #ff990040; }
+        .badge-azure { background: #0078d420; color: #0078d4; border: 1px solid #0078d440; }
+        .badge-healthy { background: #23863620; color: #3fb950; border: 1px solid #23863640; }
+        .cloud-status { display: flex; gap: 10px; margin: 20px 0; flex-wrap: wrap; }
+        #cloud-info { color: #8b949e; font-size: 0.9em; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>🌐 Multi-Cloud DR Application</h1>
+            <p class="subtitle">Infrastructure-as-Code Proof of Concept</p>
+            <div class="cloud-status">
+                <span class="badge badge-aws">☁️ AWS Primary</span>
+                <span class="badge badge-azure">☁️ Azure Standby</span>
+                <span class="badge badge-healthy">✅ Healthy</span>
+            </div>
+            <div class="status-grid">
+                <div class="status-item">
+                    <h3>PRIMARY CLOUD</h3>
+                    <div class="value" id="primary-cloud">AWS (ap-south-1)</div>
+                </div>
+                <div class="status-item">
+                    <h3>DR CLOUD</h3>
+                    <div class="value" id="dr-cloud">Azure (centralindia)</div>
+                </div>
+                <div class="status-item">
+                    <h3>RTO TARGET</h3>
+                    <div class="value">&lt; 5 minutes</div>
+                </div>
+                <div class="status-item">
+                    <h3>RPO TARGET</h3>
+                    <div class="value">&lt; 5 minutes</div>
+                </div>
+                <div class="status-item">
+                    <h3>FAILOVER</h3>
+                    <div class="value">DNS-based Auto</div>
+                </div>
+                <div class="status-item">
+                    <h3>DB REPLICATION</h3>
+                    <div class="value">Cross-Cloud Sync</div>
+                </div>
+            </div>
+            <div id="cloud-info">
+                <p>Deployed via Terraform | Docker Containerized | CI/CD Automated</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Fetch health status from backend
+        fetch('/api/health')
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById('cloud-info').innerHTML =
+                    `<p>Cloud: ${data.cloud || 'Unknown'} | Region: ${data.region || 'Unknown'} | Instance: ${data.hostname || 'Unknown'}</p>`;
+            })
+            .catch(() => {});
+    </script>
+</body>
+</html>

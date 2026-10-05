@@ -1,0 +1,11 @@
+# =============================================================================
+# Kubernetes Namespace
+# Multi-Cloud Disaster Recovery POC
+# =============================================================================
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: multicloud-dr
+  labels:
+    app: multicloud-dr
+    environment: production

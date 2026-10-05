@@ -1,0 +1,90 @@
+# =============================================================================
+# Variables - Production Environment
+# =============================================================================
+
+variable "project_name" {
+  description = "Project name used for resource naming and tagging"
+  type        = string
+  default     = "multicloud-dr"
+}
+
+variable "environment" {
+  description = "Environment name"
+  type        = string
+  default     = "prod"
+}
+
+variable "alert_email" {
+  description = "Email address for monitoring alerts"
+  type        = string
+}
+
+variable "aws_region" {
+  description = "AWS region for deployment"
+  type        = string
+  default     = "ap-south-1"
+}
+
+variable "aws_vpc_cidr" {
+  description = "CIDR block for AWS VPC"
+  type        = string
+  default     = "10.0.0.0/16"
+}
+
+variable "aws_ami_id" {
+  description = "AMI ID for EC2 instances"
+  type        = string
+  default     = "ami-0dee22c13ea7a9a67"
+}
+
+variable "aws_instance_type" {
+  description = "EC2 instance type"
+  type        = string
+  default     = "t3.small"
+}
+
+variable "aws_key_name" {
+  description = "AWS SSH key pair name"
+  type        = string
+}
+
+variable "azure_subscription_id" {
+  description = "Azure subscription ID"
+  type        = string
+}
+
+variable "azure_location" {
+  description = "Azure region"
+  type        = string
+  default     = "centralindia"
+}
+
+variable "azure_vm_size" {
+  description = "Azure VM size"
+  type        = string
+  default     = "Standard_B2s"
+}
+
+variable "azure_admin_password" {
+  description = "Azure VM admin password"
+  type        = string
+  sensitive   = true
+}
+
+variable "db_name" {
+  description = "Database name"
+  type        = string
+  default     = "drapp"
+}
+
+variable "db_username" {
+  description = "Database admin username"
+  type        = string
+  default     = "dbadmin"
+}
+
+variable "db_password" {
+  description = "Database admin password"
+  type        = string
+  sensitive   = true
+}
